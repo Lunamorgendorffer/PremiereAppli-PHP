@@ -21,6 +21,17 @@ if (isset($_POST['submit'])){ //si le formulaire a été soumis et si le bouton 
     }
 }
 
+//fonction pour creer un message du succès ou de l'erreur 
+if ($name && $price && $qtt) {
+    // Ajouter le produit à la session des produits
+    $_SESSION['products'][] = $product;
+    // Stocker le message de succès dans une variable de session
+    $_SESSION['message'] = "Produit ajouté avec succès !";
+} else {
+    // Stocker le message d'erreur dans une variable de session
+    $_SESSION['message'] = "Erreur : veuillez vérifier les informations saisies.";
+}
+
 
 header("location:index.php"); // Rediriger l'utilisateur vers la page d'accueil (index.php)
 ?>
