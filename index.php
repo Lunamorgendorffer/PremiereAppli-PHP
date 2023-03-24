@@ -10,23 +10,16 @@
     <h1>ACCUEIL</h1>
     <nav>
         <ul>
-            <li><a href="http://localhost/appli/index.php">ACCUEIL</a></li>
-            <li><a href="http://localhost/appli/recap.php">RECAPUTILATIF</a></li>
+            <li><a href="index.php">ACCUEIL</a></li>
+            <li><a href="recap.php">RECAPUTILATIF</a></li>
         </ul>
     </nav>
     
-    <?php
-    // Afficher le message de succès ou d'erreur s'il existe
-    if (isset($_SESSION['message'])) {
-        echo "<p>".$_SESSION['message']."</p>";
-        // Supprimer la variable de session pour qu'elle ne soit affichée qu'une seule fois
-        unset($_SESSION['message']);
-    }
-    ?>
-    
+   
+
     <h2>Ajouter un produit</h2>
 
-    <form action="traitement.php" method="post"> 
+    <form action="traitement.php?action=ajouter" method="post"> 
     <!--  La méthode employée ici est POST, pour ne pas "polluer" l'URL avec les données du
     formulaire. -->
         <p>
@@ -51,7 +44,9 @@
         <input type="submit" name="submit" value="Ajouter le produit">
         </p>
     </form>
-    </table>
+
+    
+    
 </body>
 </html>
 <!-- action : (qui indique la cible du formulaire, le fichier à atteindre lorsque l'utilisateur
