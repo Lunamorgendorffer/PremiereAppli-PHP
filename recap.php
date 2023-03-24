@@ -30,6 +30,7 @@ session_start();
     if(!isset($_SESSION['products'])|| empty($_SESSION['products'])){ // Vérifier si la variable de session 'products' n'existe pas ou est vide
         // Si c'est le cas, afficher un message informant qu'il n'y a aucun produit en session
         echo "<p>Aucun produit en session ...</p>";
+        
     }
     else{ // sinon afficher sous forme de  tableau les informations demandées 
         echo "<table>",
@@ -45,12 +46,19 @@ session_start();
                 "<tbody>";
         $totalGeneral = 0 ; // Initialiser la variable pour le total général
         foreach($_SESSION['products'] as $index => $product){ // Parcourir tous les produits stockés en session et afficher leurs informations dans le tableau
-            echo "<tr>",
+            echo "<tr>", 
                         "<td>".$index."</td>",
                         "<td>".$product['name']."</td>",
                         "<td>".number_format($product['price'],2,",","&nbsp;")."&nbsp;€</td>", // Afficher le prix formaté du produit en cours, avec un espace insécable et le symbole € à la fin
                         "<td>".$product['qtt']."</td>",
+                        "<td>
+                            <a href='traitement.php?action=moins&id=".$index."'><button>-</button></a>
+                            ".number_format($product['qtt'])."
+                            <a href='traitement.php?action=plus&id=".$index."'><button>+</button></a>
+                            </td>",
                         "<td>".number_format($product['total'],2,",","&nbsp;")."&nbsp;€</td>", // Afficher le prix TOTAL du ou des  produit en cours, avec un espace insécable et le symbole € à la fin
+                        // ajout d'un bouton supprimer ligne
+                        "<td id='button'><a href='traitement.php?action=supprimer&id=".$index."' ><button>Supprimer</button><a></td>",
                     "</tr>";
              $totalGeneral += $product['total'] ; // Ajouter le total de chaque produit au total général
         }
@@ -62,6 +70,14 @@ session_start();
             "</table>";
     }
     
+    
+    
+    // Afficher le message de succès ou d'erreur s'il existe
+    if (isset($_SESSION['message'])) {
+        echo "<p>".$_SESSION['message']."</p>";
+        // Supprimer la variable de session pour qu'elle ne soit affichée qu'une seule fois
+        unset($_SESSION['message']);
+    }
     ?>
 </body>
 </html>
