@@ -81,6 +81,11 @@ input[type=submit]{
     background-color: rgb(65, 124, 233);
 }
 
+.pflex{
+    display: flex;
+    justify-content: center;
+}
+
 
 /* ************************************************ RECAP.¨HP ******************************************************************* */
 

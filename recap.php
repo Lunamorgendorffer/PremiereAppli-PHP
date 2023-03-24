@@ -25,7 +25,7 @@ session_start();
     else{
         $nbProducts = 0;
     }
-    echo "<p>Nombre de produits en session : ".$nbProducts."</p>";
+    echo "<p style=text-align:center>Nombre de produits en session : ".$nbProducts."</p>";
 
     if(!isset($_SESSION['products'])|| empty($_SESSION['products'])){ // Vérifier si la variable de session 'products' n'existe pas ou est vide
         // Si c'est le cas, afficher un message informant qu'il n'y a aucun produit en session

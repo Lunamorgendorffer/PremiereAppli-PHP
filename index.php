@@ -39,7 +39,7 @@
                     <input type="number" name="qtt" value="1">
                 </label>
                 </p>
-                <p>
+                <p class="pflex">
                 <input type="submit" name="submit" value="Ajouter le produit">
                 </p>
                 </form>
