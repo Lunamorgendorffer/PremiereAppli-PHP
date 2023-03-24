@@ -81,5 +81,11 @@ session_start();
         unset($_SESSION['message']);
     }
     ?>
+
+    <div class="panier">
+    <a class="panier" href="traitement.php?action=vider&id="><button>Vider Panier</button></a>
+
+    </div>
+
 </body>
 </html>

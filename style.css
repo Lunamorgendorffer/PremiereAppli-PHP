@@ -143,10 +143,32 @@ button{
 
 .supp{
     margin: 5px;
-    background-color:  #980000;
+    background-color:  #3ba48f;
     padding: 7px 20px;
     border: none;
     border-radius: 10px;
     color: white;
     cursor: pointer;
 } 
+
+.supp:hover{
+    background-color:  #980000;
+
+}
+
+.panier{
+    position: absolute;
+    left: 31vw;
+    margin-top: 10px;
+    
+}
+
+.panier button{
+    white-space: nowrap;
+   text-align: center;
+}
+
+.panier button:hover {
+    transition: 0.7s ease;
+    background-color: rgb(65, 124, 233);
+}
