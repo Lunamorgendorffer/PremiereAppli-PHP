@@ -17,16 +17,18 @@ $products = findAll();
 <body>
     <ul class="menu">
         <li class= menu-items><a class="menu-links" href="admin.php">Home</a></li>
-        <li class= menu-items><a class="menu-links"href='product.php'>AJOUT PRODUIT</a></li>
+        <li class= menu-items><a class="menu-links"href='index.php'>AJOUT PRODUIT</a></li>
         <li class= menu-items ><a  class="menu-links" href="recap.php">RECAPUTILATIF</a></li>
     </ul>
     <?php
-    if ((isset($_SESSION['products'])) || !empty($_SESSION['products']) ){ //si la une variable product est déclarée ou est différente de null
-        $qtt= 0; // on instancie la qantité à 0
-        foreach (($_SESSION['products']) as $products => $product) { 
-            $qtt += $product['qtt']; // on incremente la quantité de product
-        }
+     if(isset($_SESSION['products'])){
+        $nbProducts = count($_SESSION['products']);
     }
+    else{
+        $nbProducts = 0;
+    }
+    echo "<p style=text-align:center>Nombre de produits en session : ".$nbProducts."</p>";
+   
     ?>
 
     <section class="inputs">

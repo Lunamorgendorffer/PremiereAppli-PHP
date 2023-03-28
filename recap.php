@@ -14,7 +14,7 @@ session_start();
 <body>
     <ul class="menu">
         <li class= menu-items><a class="menu-links" href="admin.php">Home</a></li>
-        <li class= menu-items><a class="menu-links"href='product.php'>AJOUT PRODUIT</a></li>
+        <li class= menu-items><a class="menu-links"href='index.php'>AJOUT PRODUIT</a></li>
         <li class= menu-items ><a  class="menu-links" href="recap.php">RECAPUTILATIF</a></li>
     </ul>
     <?php 
