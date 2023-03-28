@@ -2,6 +2,8 @@
 //une session permet de stocker des données utilisateur sur le serveur de manière à pouvoir les réutiliser sur différentes pages web.
 session_start(); // démarrer une session sur le serveur pour l'utilisateur courant ou reprendre une session existante
 
+include 'db-functions.php';
+
 if (isset($_GET['action'])){ // isset : Détermine si une variable est déclarée ET est différente de null
      
     switch($_GET['action']){ // équivaut à une série d'instruction if
@@ -9,19 +11,22 @@ if (isset($_GET['action'])){ // isset : Détermine si une variable est déclaré
             if (isset($_POST['submit'])){ //si le formulaire a été soumis et si le bouton "submit" a été cliqué. Alors,
 
                 $name = filter_input(INPUT_POST,"name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);  //supprime une chaîne de caractères de toute présence de caractères spéciaux et de toute balise HTML 
-                $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION); //On valide le prix que s'il est un nombre à virgule (pas de texte ou autre…), le drapeau FILTER_FLAG_ALLOW_FRACTION est ajouté pour permettre l'utilisation du caractère "," ou "." pour la décimale.
-                $qtt = filter_input(INPUT_POST,"qtt", FILTER_VALIDATE_INT); //e validera la quantité que si celle-ci est un nombre entier, au moins égal à 1.
+                $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT); //On valide le prix que s'il est un nombre à virgule (pas de texte ou autre…), le drapeau FILTER_FLAG_ALLOW_FRACTION est ajouté pour permettre l'utilisation du caractère "," ou "." pour la décimale.
+                $descr = filter_input(INPUT_POST,"descr", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //e validera la quantité que si celle-ci est un nombre entier, au moins égal à 1.
             
-                if($name && $price && $qtt){
+                if($name && $price && $descr){
             
                     $product = [
                         "name" => $name, // prend la valeur de la variable name 
                         "price"=> $price, // prend la valeur de la variable price
-                        "qtt" => $qtt, // prend la valeur de la variable qtt
-                        "total"=> $price*$qtt, // prend la valeur du produit price x qtt
+                        "descr" => $descr
+                        // "qtt" => $qtt, // prend la valeur de la variable qtt
+                        // "total"=> $price*$qtt, // prend la valeur du produit price x qtt
                     ];
+                    $id = insertProduct($product['name'], $product['descr'], $product['price']); // initialisation de la fonction
+                    header("Location:product.php?id=".$id);
             
-                    $_SESSION['products'][]=$product; // Ajouter le produit actuel à la session des produits
+                    // $_SESSION['products'][]=$product; // Ajouter le produit actuel à la session des produits
                     
                     $_SESSION['message'] = "Produit ajouté avec succès !";
                     
@@ -32,6 +37,29 @@ if (isset($_GET['action'])){ // isset : Détermine si une variable est déclaré
             }  
          // Instruction permettant de sortir de la structure 
         break;
+
+        case "ajouterPanier": // fonction pour ajouter un produit
+            if (isset($_GET['id'])) {
+
+                $id = filter_var($_GET['id'], FILTER_VALIDATE_INT); //
+                $item = findOneById($id);
+                $qtt = 1;
+
+                if ($id) {
+
+                    $product = [
+                        "name" => $item['name'],
+                        "price" => $item['price'],
+                        "qtt" => $qtt,
+                        "total" => $item['price'] * $qtt
+                    ];
+                    
+                    $_SESSION['products'][] = $product;
+                    $_SESSION['message'] = "Produit ajouté avec succès !";
+                    header("Location:recap.php");
+                }
+            }
+        break; // fin de cette condition du switch
     
         // Vider le panier en totalité
         case "vider" :
@@ -83,6 +111,7 @@ if (isset($_GET['action'])){ // isset : Détermine si une variable est déclaré
             header("Location:recap.php");
             die();               
         break;
+
     
         
     }

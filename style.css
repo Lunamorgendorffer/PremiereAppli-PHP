@@ -5,7 +5,7 @@
 }
 
 /* ************************************************INDEX.PHP******************************************************************* */
-ul {
+.menu {
     list-style-type: none;
     overflow: hidden;
     background-color: #1294b8;
@@ -14,11 +14,11 @@ ul {
     justify-content: center;
 }
   
-li {
+.menu-items {
     float: left;
 }
   
-li a {
+.menu-links{
     display: block;
     color: white;
     text-align: center;
@@ -28,7 +28,7 @@ li a {
     font-size: larger;
 }
   
-li a:hover {
+.menu-links:hover {
     background-color:rgb(65, 124, 233);
 }
   
@@ -105,7 +105,9 @@ input[type=submit]{
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-top: 21px;
 }
+
 
 .styled-table thead tr {
     background-color: #009879;
@@ -171,4 +173,10 @@ button{
 .panier button:hover {
     transition: 0.7s ease;
     background-color: rgb(65, 124, 233);
+}
+/**Product**/
+
+.carts{
+    display: flex;
+    justify-content: center;
 }

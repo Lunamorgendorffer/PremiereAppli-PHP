@@ -12,10 +12,10 @@ session_start();
     <title>Récapitulatif des produits</title>
 </head>
 <body>
-<ul>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href='index.php'>AJOUT PRODUIT</a></li>
-        <li><a href="recap.php">RECAPUTILATIF</a></li>
+    <ul class="menu">
+        <li class= menu-items><a class="menu-links" href="admin.php">Home</a></li>
+        <li class= menu-items><a class="menu-links"href='product.php'>AJOUT PRODUIT</a></li>
+        <li class= menu-items ><a  class="menu-links" href="recap.php">RECAPUTILATIF</a></li>
     </ul>
     <?php 
     //Pour afficher le nombre de produits présents en session à tout moment,
